@@ -3,6 +3,7 @@
  int secondSwitch = 4;
  int thirdSwitch = 6;
  int fourthSwitch = 8;
+ int fifthSwitch = 10;
 
 void setup() {
   // put your setup code here, to run once:
@@ -11,6 +12,7 @@ void setup() {
   pinMode(secondSwitch, OUTPUT);
   pinMode(thirdSwitch, OUTPUT);
   pinMode(fourthSwitch, OUTPUT);
+  pinMode(fifthSwitch, OUTPUT);
 
 }
 
@@ -21,13 +23,13 @@ char *decToBin(int decimalNumber) {
   Serial.print("----------");
   Serial.println();
   int i = 0;
-  static char x[4] = "0000";  
+  static char x[5] = "0000";  
   if(decimalNumber < 1) {
     Serial.println((String)x);
     return x;
   }
  
-  while(i < 4) {
+  while(i < 5) {
 
    int val = decimalNumber % 2;
     
@@ -60,6 +62,7 @@ void printBinary(char *x) {
   x[1] == '1' ? digitalWrite(secondSwitch, HIGH) : digitalWrite(secondSwitch, LOW);
   x[2] == '1' ? digitalWrite(thirdSwitch, HIGH) : digitalWrite(thirdSwitch, LOW);
   x[3] == '1' ? digitalWrite(fourthSwitch, HIGH) : digitalWrite(fourthSwitch, LOW);
+  x[4] == '1' ? digitalWrite(fifthSwitch, HIGH) : digitalWrite(fifthSwitch, LOW);
 }
 
 void loop() {
@@ -67,11 +70,13 @@ void loop() {
   // put your main code here, to run repeatedly:
   // task, count from one to 15
 
-  for(int i = 0; i < 16; i++) {
+  digitalWrite(fifthSwitch, HIGH);
+
+  for(int i = 0; i < 31; i++) {
     char *binaryRep;
     binaryRep = decToBin(i);
     printBinary(binaryRep);   
-    delay(5000);
+    delay(2000);
   }
 
 }
